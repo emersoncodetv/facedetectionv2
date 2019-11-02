@@ -12,19 +12,12 @@ function getStringDate() {
   const year = capturedAtDate.getFullYear();
   const monthRaw = capturedAtDate.getMonth();
   const month =
-    monthRaw < 10
-      ? String.prototype.concat("0", monthRaw.toString())
-      : monthRaw.toString();
+    monthRaw < 10 ? String.prototype.concat("0", monthRaw.toString()) : monthRaw.toString();
   const dayRaw = capturedAtDate.getDate();
-  const day =
-    dayRaw < 10
-      ? String.prototype.concat("0", dayRaw.toString())
-      : dayRaw.toString();
+  const day = dayRaw < 10 ? String.prototype.concat("0", dayRaw.toString()) : dayRaw.toString();
   const hoursRaw = capturedAtDate.getHours();
   const hours =
-    hoursRaw < 10
-      ? String.prototype.concat("0", hoursRaw.toString())
-      : hoursRaw.toString();
+    hoursRaw < 10 ? String.prototype.concat("0", hoursRaw.toString()) : hoursRaw.toString();
   const minutesRaw = capturedAtDate.getMinutes();
   const minutes =
     minutesRaw < 10
@@ -36,14 +29,14 @@ function getStringDate() {
       ? String.prototype.concat("0", secondsRaw.toString())
       : secondsRaw.toString();
   const millisecondsRaw = capturedAtDate.getMilliseconds();
-  const milliseconds =
-    millisecondsRaw < 10
-      ? String.prototype.concat("00", millisecondsRaw.toString())
-      : millisecondsRaw < 100
-      ? String.prototype.concat("0", millisecondsRaw.toString())
-      : millisecondsRaw.toString();
+  // const milliseconds =
+  //   millisecondsRaw < 10
+  //     ? String.prototype.concat("00", millisecondsRaw.toString())
+  //     : millisecondsRaw < 100
+  //     ? String.prototype.concat("0", millisecondsRaw.toString())
+  //     : millisecondsRaw.toString();
 
-  return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}:${milliseconds}`;
+  return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 }
 
 fdk.handle(async function(input) {
@@ -56,15 +49,30 @@ fdk.handle(async function(input) {
   }
 
   const connection = await pool.getConnection();
-  const insert = await connection.execute(
-    "insert into EXPRESSIONS (CAPTURED_AT,EXPRESSION,PROBABILITY) values (:capturedAt, :expression, :probability )",
-    {
-      capturedAt: getStringDate(),
-      expression: "Feliz",
-      probability: 0.5234523
-    },
-    { autoCommit: true }
+
+  const inserts = input.map(face =>
+    connection.execute(
+      "insert into EXPRESSIONS (CAPTURED_AT,EXPRESSION,PROBABILITY) values (:capturedAt, :expression, :probability)",
+      {
+        capturedAt: getStringDate(),
+        expression: face.key,
+        probability: face.value
+      },
+      { autoCommit: true }
+    )
   );
+
+  const response = await Promise.all(inserts);
+
+  // const insert = await connection.execute(
+  //   "insert into EXPRESSIONS (CAPTURED_AT,EXPRESSION,PROBABILITY) values (:capturedAt, :expression, :probability )",
+  //   {
+  //     capturedAt: getStringDate(),
+  //     expression: "Feliz",
+  //     probability: 0.5234523
+  //   },
+  //   { autoCommit: true }
+  // );
   await connection.close();
-  return { insert: insert, complete: true };
+  return { inserts: response.length, complete: true };
 }, {});
