@@ -20,6 +20,16 @@ function startVideo() {
     });
 }
 
+function handleFloat(number) {
+  floatNumber = Number(number)
+    .toFixed(4)
+    .replace(/\.?0+$/, "");
+
+  intNumber = Math.round(Number.parseFloat(floatNumber) * 1000);
+
+  return intNumber.toString();
+}
+
 video.addEventListener("play", () => {
   const canvas = faceapi.createCanvasFromMedia(video);
   document.body.append(canvas);
@@ -30,7 +40,21 @@ video.addEventListener("play", () => {
       .detectAllFaces(video, new faceapi.TinyFaceDetectorOptions())
       .withFaceLandmarks()
       .withFaceExpressions();
-    console.log(detections);
+
+    let expressionsToSave = [];
+
+    detections.forEach(value => {
+      expressionsToSave = expressionsToSave.concat([
+        { key: "neutral", value: handleFloat(value.expressions.neutral) },
+        { key: "happy", value: handleFloat(value.expressions.happy) },
+        { key: "sad", value: handleFloat(value.expressions.sad) },
+        { key: "angry", value: handleFloat(value.expressions.angry) },
+        { key: "fearful", value: handleFloat(value.expressions.fearful) },
+        { key: "disgusted", value: handleFloat(value.expressions.disgusted) },
+        { key: "surprised", value: handleFloat(value.expressions.surprised) }
+      ]);
+    });
+    console.log(JSON.stringify(expressionsToSave));
     const resizedDetections = faceapi.resizeResults(detections, displaySize);
     canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
     faceapi.draw.drawDetections(canvas, resizedDetections);
