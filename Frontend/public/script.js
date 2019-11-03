@@ -54,7 +54,15 @@ video.addEventListener("play", () => {
         { key: "surprised", value: handleFloat(value.expressions.surprised) }
       ]);
     });
-    console.log(JSON.stringify(expressionsToSave));
+    // console.log(JSON.stringify(expressionsToSave));
+    fetch("/insert", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(expressionsToSave)
+    });
     const resizedDetections = faceapi.resizeResults(detections, displaySize);
     canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
     faceapi.draw.drawDetections(canvas, resizedDetections);
