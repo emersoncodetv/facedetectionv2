@@ -1,8 +1,13 @@
 const express = require("express");
+const https = require("https");
 const app = express();
 const port = 3000;
 var path = require("path");
 var bodyParser = require("body-parser");
+var cors = require("cors");
+const fs = require("fs");
+
+app.use(cors());
 
 // parse various different custom JSON types as JSON
 // app.use(bodyParser.json({ type: "application/*+json" }));
@@ -28,4 +33,15 @@ app.post("/insert", (req, res) => {
   );
 });
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+// app.listen(port, () => console.log(`Example app listening on port ${port}!`)$
+https
+  .createServer(
+    {
+      key: fs.readFileSync("server.key"),
+      cert: fs.readFileSync("server.cert")
+    },
+    app
+  )
+  .listen(3000, () => {
+    console.log("Listening...");
+  });

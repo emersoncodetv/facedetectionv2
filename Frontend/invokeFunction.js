@@ -20,7 +20,7 @@ var parameters = {
 };
 var callback = function(data) {
   // logger.log("debug", JSON.stringify(data));
-  console.log(JSON.stringify(data));
+  // console.log(JSON.stringify(data));
   // console.log("callback", data);
   return;
 };

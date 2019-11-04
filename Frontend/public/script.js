@@ -1,5 +1,9 @@
 const video = document.getElementById("video");
 
+// video.setAttribute("autoplay", "");
+// video.setAttribute("muted", "");
+// video.setAttribute("playsinline", "");
+
 Promise.all([
   faceapi.nets.tinyFaceDetector.loadFromUri("./models"),
   faceapi.nets.faceLandmark68Net.loadFromUri("./models"),
@@ -55,7 +59,7 @@ video.addEventListener("play", () => {
       ]);
     });
     // console.log(JSON.stringify(expressionsToSave));
-    fetch("/insert", {
+    fetch("http://129.146.143.38/insert", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -68,7 +72,7 @@ video.addEventListener("play", () => {
     faceapi.draw.drawDetections(canvas, resizedDetections);
     faceapi.draw.drawFaceLandmarks(canvas, resizedDetections);
     faceapi.draw.drawFaceExpressions(canvas, resizedDetections);
-  }, 1000);
+  }, 5000);
 });
 
 // H7EskEQ:{9sbN{JnE2#M
