@@ -48,13 +48,13 @@ async function invokeFunction(functionParams, input) {
 //     host: "6q2o72e3mba.us-phoenix-1.functions.oci.oraclecloud.com"
 //   },
 //   [
-//     { key: "neutral", value: "966" },
-//     { key: "happy", value: "30" },
-//     { key: "sad", value: "0" },
-//     { key: "angry", value: "0" },
-//     { key: "fearful", value: "0" },
-//     { key: "disgusted", value: "0" },
-//     { key: "surprised", value: "4" }
+//     { key: "ATENCION", value: "762", device: "Dispositivo 01" },
+//     { key: "FELIZ", value: "45", device: "Dispositivo 01" },
+//     { key: "TRISTE", value: "0", device: "Dispositivo 01" },
+//     { key: "ENOJADO", value: "3", device: "Dispositivo 01" },
+//     { key: "TEMEROSO", value: "0", device: "Dispositivo 01" },
+//     { key: "DISGUSTADO", value: "1", device: "Dispositivo 01" },
+//     { key: "SORPRENDIDO", value: "189", device: "Dispositivo 01" }
 //   ]
 // );
 

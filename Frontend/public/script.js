@@ -30,8 +30,9 @@ function handleFloat(number) {
     .replace(/\.?0+$/, "");
 
   intNumber = Math.round(Number.parseFloat(floatNumber) * 1000);
+  const FinalNumber = intNumber / 1000;
 
-  return intNumber.toString();
+  return FinalNumber > 1 ? "000" : (FinalNumber * 1000).toString();
 }
 
 video.addEventListener("play", () => {
@@ -46,27 +47,30 @@ video.addEventListener("play", () => {
       .withFaceExpressions();
 
     let expressionsToSave = [];
+    let device = `Dispositivo ${document.getElementById("topright").value}`;
 
     detections.forEach(value => {
       expressionsToSave = expressionsToSave.concat([
-        { key: "neutral", value: handleFloat(value.expressions.neutral) },
-        { key: "happy", value: handleFloat(value.expressions.happy) },
-        { key: "sad", value: handleFloat(value.expressions.sad) },
-        { key: "angry", value: handleFloat(value.expressions.angry) },
-        { key: "fearful", value: handleFloat(value.expressions.fearful) },
-        { key: "disgusted", value: handleFloat(value.expressions.disgusted) },
-        { key: "surprised", value: handleFloat(value.expressions.surprised) }
+        { key: "ATENCION", value: handleFloat(value.expressions.neutral), device },
+        { key: "FELIZ", value: handleFloat(value.expressions.happy), device },
+        { key: "TRISTE", value: handleFloat(value.expressions.sad), device },
+        { key: "ENOJADO", value: handleFloat(value.expressions.angry), device },
+        { key: "TEMEROSO", value: handleFloat(value.expressions.fearful), device },
+        { key: "DISGUSTADO", value: handleFloat(value.expressions.disgusted), device },
+        { key: "SORPRENDIDO", value: handleFloat(value.expressions.surprised), device }
       ]);
     });
     // console.log(JSON.stringify(expressionsToSave));
-    fetch("http://129.146.143.38/insert", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(expressionsToSave)
-    });
+    if (device !== "Dispositivo ") {
+      fetch("./insert", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(expressionsToSave)
+      });
+    }
     const resizedDetections = faceapi.resizeResults(detections, displaySize);
     canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
     faceapi.draw.drawDetections(canvas, resizedDetections);

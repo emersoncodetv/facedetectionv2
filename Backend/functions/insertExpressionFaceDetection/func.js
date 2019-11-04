@@ -44,7 +44,7 @@ fdk.handle(async function(input) {
     pool = await oracledb.createPool({
       user: process.env.DB_USER || "admin",
       password: process.env.DB_PASSWORD || "Welcome12345#",
-      connectString: process.env.CONNECT_STRING || "adwfaced_medium"
+      connectString: process.env.CONNECT_STRING || "adwfaced_low"
     });
   }
 
@@ -52,11 +52,12 @@ fdk.handle(async function(input) {
 
   const inserts = input.map(face =>
     connection.execute(
-      "insert into EXPRESSIONS (CAPTURED_AT,EXPRESSION,PROBABILITY) values (:capturedAt, :expression, :probability)",
+      "insert into EXPRESSIONS (CAPTURED_AT,EXPRESSION,PROBABILITY,DEVICE) values (:capturedAt, :expression, :probability, :device)",
       {
         capturedAt: getStringDate(),
         expression: face.key,
-        probability: face.value
+        probability: face.value,
+        device: face.device
       },
       { autoCommit: true }
     )
