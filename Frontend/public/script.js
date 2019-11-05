@@ -46,21 +46,22 @@ video.addEventListener("play", () => {
       .withFaceLandmarks()
       .withFaceExpressions();
 
+    let time = getStringDate();
     let expressionsToSave = [];
     let device = `Dispositivo ${document.getElementById("topright").value}`;
 
     detections.forEach(value => {
       expressionsToSave = expressionsToSave.concat([
-        { key: "ATENCION", value: handleFloat(value.expressions.neutral), device },
-        { key: "FELIZ", value: handleFloat(value.expressions.happy), device },
-        { key: "TRISTE", value: handleFloat(value.expressions.sad), device },
-        { key: "ENOJADO", value: handleFloat(value.expressions.angry), device },
-        { key: "TEMEROSO", value: handleFloat(value.expressions.fearful), device },
-        { key: "DISGUSTADO", value: handleFloat(value.expressions.disgusted), device },
-        { key: "SORPRENDIDO", value: handleFloat(value.expressions.surprised), device }
+        { time, key: "ATENCION", value: handleFloat(value.expressions.neutral), device },
+        { time, key: "FELIZ", value: handleFloat(value.expressions.happy), device },
+        { time, key: "TRISTE", value: handleFloat(value.expressions.sad), device },
+        { time, key: "ENOJADO", value: handleFloat(value.expressions.angry), device },
+        { time, key: "TEMEROSO", value: handleFloat(value.expressions.fearful), device },
+        { time, key: "DISGUSTADO", value: handleFloat(value.expressions.disgusted), device },
+        { time, key: "SORPRENDIDO", value: handleFloat(value.expressions.surprised), device }
       ]);
     });
-    // console.log(JSON.stringify(expressionsToSave));
+    console.log(JSON.stringify(expressionsToSave));
     if (device !== "Dispositivo ") {
       fetch("./insert", {
         method: "POST",

@@ -54,7 +54,8 @@ fdk.handle(async function(input) {
     connection.execute(
       "insert into EXPRESSIONS (CAPTURED_AT,EXPRESSION,PROBABILITY,DEVICE) values (:capturedAt, :expression, :probability, :device)",
       {
-        capturedAt: getStringDate(),
+        // capturedAt: getStringDate(),
+        capturedAt: face.time,
         expression: face.key,
         probability: face.value,
         device: face.device
