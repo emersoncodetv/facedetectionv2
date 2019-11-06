@@ -15,3 +15,24 @@ En la mayoría, por no decir todas los eventos de tecnología, al final te piden
 ## Solución
 
 En los eventos que tienen un formato de cátedra, donde los asistentes están ya sea de pie o sentados prestando atención a una tarima o area de presentación, el objetivo es durante la charla/presentación de los expositores, capturar las expresiones faciales de los asistentes y tener un minutograma discriminando por las diferentes expresiones/reacciones recolectadas, e.g.: atento, distraídos, enojado, triste, etc.
+
+# Paso a paso para el despliegue de la aplicación 
+
+#### Configuración del OCI CLI 
+
+MacOS, Linux, and Unix 
+
+1. Abre una terminal.
+
+2. Para iniciar el script de instalación, ejecute el siguiente comando.
+
+```shell
+bash -c "$(curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh)"
+```
+
+3. Iniciar la configuración del CLI
+
+```shell
+oci setup config
+```
+
