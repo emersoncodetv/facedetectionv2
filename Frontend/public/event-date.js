@@ -3,7 +3,9 @@ function getStringDate() {
   const year = capturedAtDate.getFullYear();
   const monthRaw = capturedAtDate.getMonth();
   const month =
-    monthRaw < 10 ? String.prototype.concat("0", monthRaw.toString()) : monthRaw.toString();
+    monthRaw + 1 < 10
+      ? String.prototype.concat("0", (monthRaw + 1).toString())
+      : (monthRaw + 1).toString();
   const dayRaw = capturedAtDate.getDate();
   const day = dayRaw < 10 ? String.prototype.concat("0", dayRaw.toString()) : dayRaw.toString();
   const hoursRaw = capturedAtDate.getHours();

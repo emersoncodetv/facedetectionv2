@@ -52,7 +52,7 @@ video.addEventListener("play", () => {
 
     detections.forEach(value => {
       expressionsToSave = expressionsToSave.concat([
-        { time, key: "ATENCION", value: handleFloat(value.expressions.neutral), device },
+        { time, key: "ATENTO", value: handleFloat(value.expressions.neutral), device },
         { time, key: "FELIZ", value: handleFloat(value.expressions.happy), device },
         { time, key: "TRISTE", value: handleFloat(value.expressions.sad), device },
         { time, key: "ENOJADO", value: handleFloat(value.expressions.angry), device },
