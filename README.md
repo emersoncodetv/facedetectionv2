@@ -100,4 +100,4 @@ bash -c "$(curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scrip
 oci setup config
 ```
 
-Read more [here](./Backend/README.md) # It works!
+Read more [here](./Backend/) # It works!
