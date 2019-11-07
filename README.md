@@ -16,7 +16,7 @@ En la mayoría, por no decir todas los eventos de tecnología, al final te piden
 
 En los eventos que tienen un formato de cátedra, donde los asistentes están ya sea de pie o sentados prestando atención a una tarima o area de presentación, el objetivo es durante la charla/presentación de los expositores, capturar las expresiones faciales de los asistentes y tener un minutograma discriminando por las diferentes expresiones/reacciones recolectadas, e.g.: atento, distraídos, enojado, triste, etc.
 
-# Paso a paso para el despliegue de la aplicación 
+# Instalación y Configuración Inicial
 
 #### Instalar Node.JS
 
@@ -100,4 +100,8 @@ bash -c "$(curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scrip
 oci setup config
 ```
 
-Read more [here](./Backend/) # It works!
+[Más información](https://docs.cloud.oracle.com/iaas/Content/API/SDKDocs/cliinstall.htm)
+
+### Paso a paso despliegue [Back-End](./Backend/)
+
+### Paso a paso despliegue [Front-End](./Frontend/)
