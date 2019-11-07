@@ -18,6 +18,70 @@ En los eventos que tienen un formato de cátedra, donde los asistentes están ya
 
 # Paso a paso para el despliegue de la aplicación 
 
+#### Instalar Node.JS
+
+##### macOS
+
+Instalar brew
+
+```shell
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+```
+
+Actualizar brew
+
+```shell
+brew update
+```
+
+Instalar Node.JS
+
+```shell
+brew install node
+```
+
+##### Linux Ubuntu
+
+Habilitar el repositorio NodeSource 
+
+```shell
+curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+```
+
+Instalar Node.JS
+
+```shell
+sudo apt install nodejs
+```
+
+#### Instalar la version LTS de Node.JS
+
+Instalar n 
+
+```shell
+npm install -g n
+```
+
+Actualizar Node.JS a la version LTS
+
+```shell
+n lts
+```
+
+#### Instalar Fn Project CLI
+
+##### macOS con brew
+
+```shell
+brew install fn
+```
+
+##### Linux or macOS
+
+```shell
+curl -LSs https://raw.githubusercontent.com/fnproject/cli/master/install | sh
+```
+
 #### Configuración del OCI CLI 
 
 MacOS, Linux, and Unix 
