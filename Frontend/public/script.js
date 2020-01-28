@@ -12,16 +12,11 @@ Promise.all([
 ]).then(startVideo);
 
 function startVideo() {
-  navigator.mediaDevices
-    .getUserMedia({ video: true })
-    .then(stream => {
-      this.video.srcObject = stream;
-      /* use the stream */
-    })
-    .catch(function(err) {
-      console.error(err);
-      /* handle the error */
-    });
+  navigator.getUserMedia(
+    { video: {} },
+    stream => video.srcObject = stream,
+    err => console.error(err)
+  )
 }
 
 function handleFloat(number) {
@@ -77,7 +72,18 @@ video.addEventListener("play", () => {
     faceapi.draw.drawDetections(canvas, resizedDetections);
     faceapi.draw.drawFaceLandmarks(canvas, resizedDetections);
     faceapi.draw.drawFaceExpressions(canvas, resizedDetections);
-  }, 5000);
+  }, 3000);
 });
 
 // H7EskEQ:{9sbN{JnE2#M
+/*     if (device !== "Dispositivo ") {
+      fetch("https://akwo6zj65g1yuq0-soda.adb.us-phoenix-1.oraclecloudapps.com/ords/admin/suda/latest/facedetection", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(expressionsToSave)
+      });
+    } */
+

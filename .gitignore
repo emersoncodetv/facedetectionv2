@@ -5,6 +5,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+Terraform
+TEST
+
 # Runtime data
 pids
 *.pid

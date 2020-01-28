@@ -6,6 +6,7 @@ var path = require("path");
 var bodyParser = require("body-parser");
 var cors = require("cors");
 const fs = require("fs");
+const axios = require('axios');
 
 app.use(cors());
 
@@ -14,27 +15,34 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-var invoke = require("./invokeFunction");
-
 var public = path.join(__dirname, "public");
 
-app.get("/", (req, res) => res.send("Hello World!"));
+//app.get("/", (req, res) => res.send("Hello World!"));
 
 app.use("/", express.static(public));
 
 app.post("/insert", (req, res) => {
-  invoke.InsertData(
-    {
-      path:
-        "/20181201/functions/ocid1.fnfunc.oc1.phx.aaaaaaaaaa3kvbaarhonuelfqsa2xpys2jilib23o2f6qe3vt254w75lanbq/actions/invoke",
-      host: "6q2o72e3mba.us-phoenix-1.functions.oci.oraclecloud.com"
-    },
-    req.body
-  );
+
+  axios({
+    method: 'post',
+    url: 'https://akwo6zj65g1yuq0-soda2.adb.us-phoenix-1.oraclecloudapps.com/ords/admin/soda/latest/custom-actions/insert/facedetection',
+    data: req.body,
+    headers: { 'content-type': 'application/json' },
+    auth: {
+      username: "admin",
+      password: "Welcome12345#"
+    }
+  })
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
 });
 
-// app.listen(port, () => console.log(`Example app listening on port ${port}!`)$
-https
+app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+/* https
   .createServer(
     {
       key: fs.readFileSync("server.key"),
@@ -44,4 +52,4 @@ https
   )
   .listen(port, () => {
     console.log("Listening...");
-  });
+  }); */
